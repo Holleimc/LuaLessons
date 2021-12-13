@@ -2,11 +2,11 @@ print("hellow lua")
 
 local function max(num1, num2)
     if (num1 > num2) then
-        result = num1;
+        result = num1
     else
-        result = num2;
+        result = num2
     end
-    return result; 
+    return result
 end
  -- calling a function
 print("The maximum of the two numbers is ",max(10,4))

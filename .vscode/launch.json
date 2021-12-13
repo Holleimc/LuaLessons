@@ -8,7 +8,7 @@
             "type": "lua",
             "request": "launch",
             "name": "Lua Debug",
-            "program": "${workspaceFolder}/hellow.lua"
+            "program": "${workspaceFolder}/derivative.lua"
         }
     ]
 }
