@@ -1,0 +1,61 @@
+{
+    "options": {
+        "cwd": "${fileDirname}/build"
+    },
+    "tasks": [
+        {
+            "label": "build",
+            "dependsOn":[
+                "cmake",
+                "make"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "cmake",
+            "command": "cmake",
+            "args": [
+                // "-G \"MinGW Makefiles\" .."
+                ".."
+            ]
+        },
+        {
+            "label": "make",
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // },
+            "command":"mingw32-make.exe",
+            "args": [
+                
+            ]
+        }
+    ],
+    "version": "2.0.0"
+    // {
+    //     "label": "cmake",
+    //     "type": "shell",
+    //     "command": "cmake",
+    //     "args": [
+    //         ".."
+    //     ]
+    // },
+    // {
+    //     "label": "make",
+    //     "group":{
+    //         "kind": "build",
+    //         "isDefault": true
+    //     },
+    //     "command": "mingw32-make.exe",
+    //     "args": [
+
+    //     ]
+    // },
+    // {
+    //     "label": "Build",
+    //     "dependsOn":[
+    //         "cmake",
+    //         "make"
+    //     ]
+    // }
+}
