@@ -1,5 +1,11 @@
 #include <iostream>
-#include <Lua.hpp>
+// #include <Lua.hpp>
+// #include "C:\Lua\5.1\include\lua.hpp"
+extern "C" {
+#include "C:\Lua\5.1\include\lua.h"
+#include "C:\Lua\5.1\include\lualib.h"
+#include "C:\Lua\5.1\include\lauxlib.h"
+}
 
 lua_State* L;
 
