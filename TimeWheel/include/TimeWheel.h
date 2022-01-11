@@ -13,7 +13,7 @@
 #include<thread>
 #include<mutex>
 #include <functional>
-// ��Ϣ�����С
+// 消息传输大小
 #define BUFFER_SIZE 64
 
 using namespace std;
@@ -21,12 +21,12 @@ using namespace std;
 static auto start_time = std::chrono::system_clock::now();
 //static auto start_test = std::chrono::system_clock::now();
 
-/** ʱ��ṹ��
- *	ms_pos ����
- *	s_pos ��
- *	min_pos ����
- *	hour_pos Сʱ
- *	day_pos ��
+/** 时间结构体
+ *	ms_pos 毫秒
+ *	s_pos 秒
+ *	min_pos 分钟
+ *	hour_pos 小时
+ *	day_pos 天
  */
 typedef struct TimePos_
 {
@@ -37,11 +37,11 @@ typedef struct TimePos_
 	int day_pos;
 }TimePos;
 
-/** �¼���Ϣ
- *  interval	ʱ����
- *  time_pos	ʱ���ֲ�
- *  address	�ͻ��˵�ַ
- *  sockfd	�ͻ��˾��
+/** 事件信息
+ *  interval	时间间隔
+ *  time_pos	时间轮槽
+ *  address	客户端地址
+ *  sockfd	客户端句柄
  */
 typedef struct EventInfo_
 {
@@ -60,53 +60,53 @@ public:
 	TimeWheel();
 	~TimeWheel();
 public:
-	/** ��ʼ��ʱ����
-     *	step �Ժ���Ϊ��λ����ʾ��ʱ����Сʱ������
-	 *	max_time ��ʾ��ʱ�����ܽ��ܵ�����������
+	/** 初始化时间轮
+     *	step 以毫秒为单位，表示定时器最小时间粒度
+	 *	max_time 表示定时器所能接受的最大天数间隔
 	 */
 	int initTimerWheel(int step,int max_time);
 	
 	int generateTimerID();
 	
-	/** ���Ӷ�ʱ����
-     *	sockfd �ͻ����׽���
-	 *	interval ��ʱ��� :ms
-	 *	call_back ��ʱ�ص�ִ�к���
+	/** 添加定时任务
+     *	sockfd 客户端套接字
+	 *	interval 定时间隔 :ms
+	 *	call_back 定时回调执行函数
 	 */
 	int addTimer(int sockfd, __int64 interval, std::function<void(int, char*)>& call_back);
 	
 private:
-	/** ��ʼ���ṹ��
+	/** 初始化结构体
 	 */
 	void init();
 	
-	/** ʱ����ѭ��
+	/** 时间轮循环
 	 */
 	int doLoop();
 	
-	/** �����¼�
-     *	diff_ms ��ʱʱ��
-	 *	einfo �¼�
+	/** 插入事件
+     *	diff_ms 定时时间
+	 *	einfo 事件
 	 */
 	int insertTimer(EventInfo& einfo);
 	
-	/** ��ȡ�¼���ʱ�����ϵ�λ��
-	 *	time_pos ʱ����
+	/** 获取事件在时间轮上的位置
+	 *	time_pos 时间轮
 	 */
 	int getNextTrigerPos(__int64 interval,TimePos& time_pos);
 
 	int getTimerTrigerPos(EventInfo& einfo,TimePos& time_pos);
 	
-	/** ��ȡʱ����ʱ��
+	/** 获取时间轮时间
 	 */
 	__int64 getMS(TimePos& time_pos);
 	
-	/** ����ʱ���ֲ��ϵ��¼�
-	 *	�¼��б�
+	/** 处理时间轮槽上的事件
+	 *	事件列表
 	 */
 	int dealTimeWheeling(std::list<EventInfo> leinfo);
 	
-	/** ʱ����˯��ʱ��
+	/** 时间轮睡眠时间
 	 */
 	int sleepTime(long interval, TimePos& time_pos);
 
