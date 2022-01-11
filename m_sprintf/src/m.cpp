@@ -6,14 +6,11 @@ int main()
 {
     // MyNumber m = { "1fsdfsdf", "2", "3", "4" "\n//////////////////////"};
     // m.print();  // 1 2 3 4
-    std::string a = "I ";
-    std::string b = "am ";
-    std::string c = "print ";
-    std::string d = "test ";
-    std::string e = ", ";
-    std::string f = "bye";
-    std::string g = "!";
-    std::string ret = m_sprint("[Log] this is log : %s: %d, %s: %d", c.c_str(), 6, d.c_str(), 8);
+    std::string a = "id";
+    std::string b = "data";
+    int id = 6666;
+    int data = 2022;
+    std::string ret = m_sprint("[Log] this is a log : %s: %d, %s: %d", a.c_str(), id, b.c_str(), data);
     std::cout << ret << std::endl;
 
 
